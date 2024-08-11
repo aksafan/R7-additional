@@ -30,7 +30,7 @@ RSpec.describe Customer, type: :model do
     expect(subject).to_not be_valid
   end
   it "is not valid if the email address doesn't have a @" do
-    subject.phone = '13212wefwef'
+    subject.email = '13212wefwef'
     expect(subject).to_not be_valid
   end
   it "returns the correct full_name" do
