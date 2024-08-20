@@ -4,10 +4,14 @@
 
 <div id="customers">
   <% @customers.each do |customer| %>
-    <%= render customer %>
-    <p>
-      <%= link_to "Show this customer", customer %>
-    </p>
+    <div id="<%= dom_id customer %>">
+      <%= render "customer_table", customer: customer %>
+
+      <div class="<%= dom_class customer.order %>>">
+        <%= render "customer_orders", orders: customer.order %>
+      </div>
+
+    </div>
   <% end %>
 </div>
 

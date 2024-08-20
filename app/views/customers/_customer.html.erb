@@ -14,4 +14,8 @@
     <%= customer.email %>
   </p>
 
+  <div class="<%= dom_class customer.order %>>">
+    <%= render "customer_orders", orders: customer.order %>
+  </div>
+
 </div>
