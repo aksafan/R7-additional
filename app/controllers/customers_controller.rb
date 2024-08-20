@@ -1,6 +1,6 @@
 class CustomersController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :catch_not_found
-  before_action :set_customer, only: %i[ show edit update destroy ]
+  before_action :set_customer, only: %i[ show edit update destroy destroy_with_orders ]
 
   # GET /customers or /customers.json
   def index
@@ -43,12 +43,26 @@ class CustomersController < ApplicationController
 
   # DELETE /customers/1 or /customers/1.json
   def destroy
-    @customer.destroy
+    begin
+      @customer.destroy
+      flash.notice = "The customer record was successfully deleted."
+    rescue ActiveRecord::InvalidForeignKey
+      flash.alert = "That customer record could not be deleted, because the customer has orders."
+    end
 
     respond_to do |format|
-      format.html { redirect_to customers_url, notice: "Customer was successfully destroyed." }
-      format.json { head :no_content }
+      format.html { redirect_to customers_url }
     end
+  end
+
+  def destroy_with_orders
+    if @customer.order.exists?
+      @customer.order.destroy_all
+    end
+    @customer.destroy
+    flash.notice = "The customer record and all related order records were successfully deleted."
+
+    redirect_to customers_url
   end
 
   private

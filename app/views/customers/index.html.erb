@@ -1,14 +1,38 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Customers</h1>
 
 <div id="customers">
-  <% @customers.each do |customer| %>
-    <%= render customer %>
-    <p>
-      <%= link_to "Show this customer", customer %>
-    </p>
-  <% end %>
+  <table class="table table-striped">
+
+    <thead>
+    <tr>
+      <th>Full name</th>
+      <th>Number of orders</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @customers.each do |customer| %>
+      <div id="<%= dom_id customer %>">
+        <tr>
+          <td><%= icon('fa-regular', 'bell')%> <%= customer.full_name %></td>
+          <td><%= customer.order.count %></td>
+          <td>
+            <%= link_to "Show", customer, class: "btn btn-primary" %>
+          </td>
+          <td>
+            <%= link_to "Edit", edit_customer_path(customer), class: "btn btn-primary" %>
+          </td>
+          <td>
+            <%= button_to "Delete", customer, method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: "btn btn-primary" %>
+          </td>
+        </tr>
+        <%= render "delete_modal", customer: customer %>
+      </div>
+    <% end %>
+
+    </tbody>
+
+  </table>
 </div>
 
-<%= link_to "New customer", new_customer_path %>
+<%= link_to "New customer", new_customer_path, class: "btn btn-primary" %>
