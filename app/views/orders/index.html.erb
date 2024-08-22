@@ -1,14 +1,12 @@
-<p style="color: green"><%= notice %></p>
-
 <h1>Orders</h1>
 
-<div id="orders">
-  <% @orders.each do |order| %>
-    <%= render order %>
-    <p>
-      <%= link_to "Show this order", order %>
-    </p>
-  <% end %>
+<div id="orders" class="container-fluid">
+  <div class="row row-cols-3">
+    <% @orders.each do |order| %>
+      <%= render order %>
+    <% end %>
+    <%= render "delete_modal" %>
+  </div>
 </div>
 
-<%= link_to "New order", new_order_path %>
+<%= link_to "New order", new_order_path, class: "btn btn-primary" %>

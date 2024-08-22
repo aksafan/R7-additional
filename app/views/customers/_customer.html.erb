@@ -14,6 +14,13 @@
     <%= customer.email %>
   </p>
 
+  <div>
+    <%= link_to "Edit", edit_customer_path(@customer), class: "btn btn-primary" %> |
+    <%= link_to "Back", customers_path, class: "btn btn-primary" %> |
+    <%= button_tag "Delete", type: 'button', class: "btn btn-primary", "data-bs-toggle": "modal", "data-bs-target": "#myModal-#{@customer.id}" %>
+  </div>
+
+  <h3>Orders</h3>
   <div class="<%= dom_class customer.order %>>">
     <%= render "customer_orders", orders: customer.order %>
   </div>
