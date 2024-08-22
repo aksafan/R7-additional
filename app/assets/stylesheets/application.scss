@@ -14,6 +14,30 @@
  *= require_self
  */
 
+@import "bootstrap";
+@import "font-awesome";
+
+:root {
+    --bs-body-bg: #dcc4ff;
+}
+
+@font-face {
+    font-family: 'Hello Cute';
+    src: url('Hello Cute TTF.ttf');
+}
+
 .my_alert {
     color: red;
+}
+
+.banner-background {
+    background-image: url('pngtree-multiple-wired-to-forum-exchange-picture-image_13119547.png');
+    background-size: cover;
+    width: 500px;
+    height: 300px;
+    font-family: 'Hello Cute', serif;
+}
+
+.button_to {
+    display: inline-block;
 }

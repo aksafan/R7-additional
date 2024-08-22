@@ -1,0 +1,24 @@
+<div id="<%= dom_id order %>" class="card border border-2 border-primary p-1 m-2 mt-3 text-center" style="width: 20rem;">
+  <div class="card-header">
+    <strong><%= order.product_name %></strong>
+  </div>
+
+  <div class="card-body">
+    <%= order.customer.full_name %> is buying <%= order.product_count %>.
+  </div>
+
+  <div class="card-footer">
+    <%= link_to "Show", order, class: "btn btn-primary" %>
+    <%= link_to "Edit", edit_order_path(order), class: "btn btn-primary" %> |
+    <%= button_tag "Delete",
+                   type: 'button',
+                   class: "btn btn-primary",
+                   "data-bs-toggle": "modal",
+                   "data-bs-target": "#myModal",
+                   "data-id": order.id.to_s,
+                   "data-customer": order.customer.full_name,
+                   "data-productname": order.product_name,
+                   "data-productcount": order.product_count
+    %>
+  </div>
+</div>
